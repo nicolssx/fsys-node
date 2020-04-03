@@ -1,4 +1,4 @@
-const {RESPONSE_STATUS} = require('./constants')
+const {RESPONSE_STATUS, MESSAGE_CODE} = require('./constants')
 
 class Utils {
   // 客户端发送报文解析
@@ -8,8 +8,9 @@ class Utils {
 
   // 客户端返回报文统一格式
   static getResponse(code, data, paramKey) {
-    const message = paramKey? RESPONSE_STATUS[code].replace(/\$/, paramKey) : RESPONSE_STATUS[code]
-    return {code: Number(code), message, data: data || null}
+    const msg = RESPONSE_STATUS[code]
+    const message =  msg || (MESSAGE_CODE[code].replace(/\$/, paramKey) || RESPONSE_STATUS[900])
+    return {code: msg ? Number(code) : 900, message, data: data || null}
   }
 
   // 客户端发送报文校验

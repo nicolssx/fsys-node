@@ -13,6 +13,7 @@ router.post('/delete', async (req, res) => {
   if(!uid){
     return
   }
+  // 查询关联子类
   const {result, err} = await categoryList({pid: body.id})
   if(!Utils.validDBError(res, err)){
     return
@@ -21,6 +22,8 @@ router.post('/delete', async (req, res) => {
     res.json(Utils.getResponse(508))
     return
   }
+  // 查询关联流水
+  // todo 删除子类：流水移动到父类下；删除父类：流水移动到默认分组；
   const deleteCall = await categoryDelete(body)
   if(!Utils.validDBError(res, deleteCall.err)){
     return

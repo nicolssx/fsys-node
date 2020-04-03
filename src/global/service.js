@@ -18,7 +18,7 @@ module.exports = class Service {
       res.json(getResponse(403))
       return false
     } else if(!result.refreshToken){
-      res.json(getResponse(404))
+      res.json(getResponse(402))
       return false
     }
     return Object.assign({uid: result._id.toString()}, JSON.parse(JSON.stringify(result)))

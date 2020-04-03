@@ -1,5 +1,5 @@
 const express = require('express')
-const {Utils} = require('../../global')
+const {Utils, Service} = require('../../global')
 const {dictionaryList} = require('../../dao/dictionary')
 
 const router = express.Router()

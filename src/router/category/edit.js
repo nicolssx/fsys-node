@@ -5,14 +5,17 @@ const {categoryAdd, categoryUpdate} = require('../../dao/category')
 const router = express.Router()
 
 router.post('/edit', async (req, res) => {
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, 'title type')){
-    return
-  }
+
   const {uid} = await Service.authorization(req, res)
   if(!uid){
     return
   }
+
+  const body = Utils.getBody(req)
+  if(!Utils.validRule(res, body, 'title type')){
+    return
+  }
+
   if(body.id){
     const {err} = await categoryUpdate(body)
     if(!Utils.validDBError(res, err, 507)){

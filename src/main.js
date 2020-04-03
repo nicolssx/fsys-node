@@ -40,5 +40,6 @@ app.listen(port, ()=>{
 app.use(`/${config.apiNameSpace}`, require('./router/user'))
 app.use(`/${config.apiNameSpace}`, require('./router/dictionary'))
 app.use(`/${config.apiNameSpace}`, require('./router/category'))
+app.use(`/${config.apiNameSpace}`, require('./router/book'))
 
 module.exports = app

@@ -1,30 +1,30 @@
 const express = require('express')
 const {Utils, Service} = require('../../global')
-const {dictionaryAdd, dictionaryUpdate} = require('../../dao/dictionary')
+const {bookAdd, bookUpdate} = require('../../dao/book')
 
 const router = express.Router()
 
 router.post('/edit', async (req, res) => {
   // 身份校验
-  const {isAdmin} = await Service.authorization(req, res)
-  if(!isAdmin){
-    res.json(Utils.getResponse(509))
+  const {uid} = await Service.authorization(req, res)
+  if(!uid){
     return
   }
 
   const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, 'title type')){
+  if(!Utils.validRule(res, body, 'title')){
     return
   }
 
-  if(body.id){
-    const {err} = await dictionaryUpdate(body)
+  const {id, title, icon, isDefault} = body
+  if(id){
+    const {err} = await bookUpdate({id, title, icon, isDefault, uid})
     if(!Utils.validDBError(res, err, 507)){
       return
     }
     res.json(Utils.getResponse(200))
   } else {
-    const {err} = await dictionaryAdd(body)
+    const {err} = await bookAdd({title, icon, isDefault})
     if(!Utils.validDBError(res, err)){
       return
     }

@@ -4,31 +4,23 @@ const {randomColor} = require('../global/utils')
 var Schema = mongoose.Schema
 
 module.exports = mongoose.model('Category', new Schema({
-  pid: {
-    type: String,
-    default: null
-  },
-  title: {
-    type: String,
-    required: true
-  },
-  type: {
-    type: String,
-    required: true
-  },
-  icon: {
-    type: String,
-    default: null
-  },
-  color: {
-    type: String,
-    default: randomColor
-  },
   uid: {
     type: String,
     required: true
   },
   isDefault: {
+    type: Number,
+    default: 0
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  income: {
+    type: Number,
+    default: 0
+  },
+  expense: {
     type: Number,
     default: 0
   }

@@ -1,10 +1,11 @@
 const express = require('express')
 const {Utils, Service} = require('../../global')
-const {categoryList} = require('../../dao/category')
+const {bookList} = require('../../dao/book')
 
 const router = express.Router()
 
 router.post('/list', async (req, res) => {
+  // 身份校验
   const {uid} = await Service.authorization(req, res)
   if(!uid){
     return
@@ -15,7 +16,7 @@ router.post('/list', async (req, res) => {
     return
   }
 
-  const {err, result} = await categoryList({type: body.type, uid})
+  const {err, result} = await bookList({uid})
   if(!Utils.validDBError(res, err)){
     return
   }

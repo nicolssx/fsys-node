@@ -6,14 +6,14 @@ const router = express.Router()
 
 router.post('/edit', async (req, res) => {
   // 身份校验
-  const {isAdmin} = await Service.authorization(req, res)
-  if(!isAdmin){
+  const {admin} = await Service.authorization(req, res)
+  if(!admin){
     res.json(Utils.getResponse(509))
     return
   }
 
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, 'title type')){
+  const body = Utils.getRequire(req, res, 'dictionary', 'edit')
+  if(!body){
     return
   }
 

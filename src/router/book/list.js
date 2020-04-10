@@ -11,11 +11,6 @@ router.post('/list', async (req, res) => {
     return
   }
 
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, 'type')){
-    return
-  }
-
   const {err, result} = await bookList({uid})
   if(!Utils.validDBError(res, err)){
     return

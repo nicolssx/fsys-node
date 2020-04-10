@@ -14,7 +14,7 @@ module.exports = mongoose.model('Bill', new Schema({
   },
   accountId: {
     type: String,
-    default: ''
+    default: null
   },
   categoryIds: {
     type: [String],
@@ -26,13 +26,13 @@ module.exports = mongoose.model('Bill', new Schema({
   },
   extendIds: {
     type: [{type: String, ids: [String]}],
-    default: []
+    default: null
   },
   recordAt: {
     type: Date,
     required: true
   },
-  inOut: {
+  assetType: {
     type: Number,
     required: true
   },
@@ -42,10 +42,10 @@ module.exports = mongoose.model('Bill', new Schema({
   },
   images: {
     type: String,
-    default: ''
+    default: null
   },
   remark: {
     type: String,
-    default: ''
+    default: null
   }
 }, common))

@@ -11,20 +11,19 @@ router.post('/edit', async (req, res) => {
     return
   }
 
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, 'title')){
+  const body = Utils.getRequire(req, res, 'book', 'edit')
+  if(!body){
     return
   }
 
-  const {id, title, icon, isDefault} = body
-  if(id){
-    const {err} = await bookUpdate({id, title, icon, isDefault, uid})
+  if(body.id){
+    const {err} = await bookUpdate(body)
     if(!Utils.validDBError(res, err, 507)){
       return
     }
     res.json(Utils.getResponse(200))
   } else {
-    const {err} = await bookAdd({title, icon, isDefault})
+    const {err} = await bookAdd({uid, ...body})
     if(!Utils.validDBError(res, err)){
       return
     }

@@ -41,5 +41,7 @@ app.use(`/${config.apiNameSpace}`, require('./router/user'))
 app.use(`/${config.apiNameSpace}`, require('./router/dictionary'))
 app.use(`/${config.apiNameSpace}`, require('./router/category'))
 app.use(`/${config.apiNameSpace}`, require('./router/book'))
+app.use(`/${config.apiNameSpace}`, require('./router/budget'))
+app.use(`/${config.apiNameSpace}`, require('./router/bill'))
 
 module.exports = app

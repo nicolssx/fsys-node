@@ -8,13 +8,25 @@ module.exports = mongoose.model('Category', new Schema({
     type: String,
     default: null
   },
+  uid: {
+    type: String,
+    required: true
+  },
+  isDefault: {
+    type: Number,
+    default: 0
+  },
   title: {
     type: String,
     required: true
   },
-  type: {
+  categoryType: {
     type: String,
     required: true
+  },
+  assetType: {
+    type: String,
+    default: null
   },
   icon: {
     type: String,
@@ -23,13 +35,5 @@ module.exports = mongoose.model('Category', new Schema({
   color: {
     type: String,
     default: randomColor
-  },
-  uid: {
-    type: String,
-    required: true
-  },
-  isDefault: {
-    type: Number,
-    default: 0
   }
 }, common))

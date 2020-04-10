@@ -1,6 +1,6 @@
 const express = require('express')
 const {Utils, Service} = require('../../global')
-const {bookDelete} = require('../../dao/book')
+const {billDelete} = require('../../dao/bill')
 
 const router = express.Router()
 
@@ -11,14 +11,12 @@ router.post('/delete', async (req, res) => {
     return
   }
 
-  const body = Utils.getRequire(req, res, 'book', 'delete')
+  const body = Utils.getRequire(req)
   if(!body){
     return
   }
 
-  // todo 查询账该id下账单流水置为历史数据
-
-  const {err} = await bookDelete(body)
+  const {err} = await billDelete(body)
   if(!Utils.validDBError(res, err)){
     return
   }

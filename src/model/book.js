@@ -17,6 +17,6 @@ module.exports = mongoose.model('Book', new Schema({
   },
   icon: {
     type: String,
-    default: ''
+    default: null
   }
 }, common))

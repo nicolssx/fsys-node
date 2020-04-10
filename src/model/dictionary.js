@@ -5,7 +5,7 @@ var Schema = mongoose.Schema
 module.exports = mongoose.model('Dictionary', new Schema({
   pid: {
     type: String,
-    default: null
+    default: 0
   },
   title: {
     type: String,

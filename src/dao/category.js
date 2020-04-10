@@ -1,7 +1,7 @@
 const Category = require("../model/category")
 const {aggregate} = require('../global/utils')
 
-const categoryList = (query) => new Promise(resolve => Category.aggregate(aggregate(query, 'title type pid icon color'), (err, result) => resolve({err, result})))
+const categoryList = (query) => new Promise(resolve => Category.aggregate(aggregate(query, 'pid isDefault title categoryType assetType icon color'), (err, result) => resolve({err, result})))
 
 const categoryAdd = (update) => new Promise(resolve => Category.create(update, (err, result) => resolve({err, result})))
 

@@ -7,8 +7,8 @@ const {userDetail, userUpdate} = require('../../dao/user')
 const router = express.Router()
 
 router.post('/login', async (req, res) => {
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, ['name', 'password', 'clientId', 'clientSecret'])){ // 发送报文校验
+  const body = Utils.getRequire(req, res, 'user', 'login')
+  if(!body){ // 发送报文校验
     return
   }
   const {err, result} = await userDetail({name: body.name})

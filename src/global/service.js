@@ -1,4 +1,4 @@
-const {getBody, getResponse, validDBError} = require('./utils')
+const {getResponse, validDBError} = require('./utils')
 const {userDetail} = require('../dao/user')
 
 module.exports = class Service {
@@ -9,7 +9,6 @@ module.exports = class Service {
       res.json(getResponse(403))
       return false
     }
-    const body = getBody(req)
     const {err, result} = await userDetail({accessToken: authorization.replace('Bearer ', '')})
     if(!validDBError(res, err)){
       return false

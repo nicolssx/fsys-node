@@ -11,8 +11,8 @@ router.post('/delete', async (req, res) => {
     return
   }
 
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, 'id')){
+  const body = Utils.getRequire(req, res, 'category', 'delete')
+  if(!body){
     return
   }
 

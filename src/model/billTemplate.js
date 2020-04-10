@@ -26,7 +26,7 @@ module.exports = mongoose.model('BillTemplate', new Schema({
   },
   extendIds: {
     type: [{type: String, ids: [String]}],
-    default: []
+    default: null
   },
   inOut: {
     type: Number,
@@ -38,10 +38,10 @@ module.exports = mongoose.model('BillTemplate', new Schema({
   },
   images: {
     type: String,
-    default: ''
+    default: null
   },
   remark: {
     type: String,
-    default: ''
+    default: null
   }
 }, common))

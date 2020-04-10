@@ -10,12 +10,12 @@ router.post('/list', async (req, res) => {
     return
   }
 
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, 'type')){
+  const body = Utils.getRequire(req, res, 'category', 'list')
+  if(!body){
     return
   }
 
-  const {err, result} = await categoryList({type: body.type, uid})
+  const {err, result} = await categoryList({uid, ...body})
   if(!Utils.validDBError(res, err)){
     return
   }

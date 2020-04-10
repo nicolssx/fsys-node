@@ -6,14 +6,14 @@ const router = express.Router()
 
 router.post('/delete', async (req, res) => {
   // 身份校验
-  const {isAdmin} = await Service.authorization(req, res)
-  if(!isAdmin){
+  const {admin} = await Service.authorization(req, res)
+  if(!admin){
     res.json(Utils.getResponse(509))
     return
   }
 
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, 'id')){
+  const body = Utils.getRequire(req, res, 'dictionary', 'delete')
+  if(!body){
     return
   }
 
@@ -26,7 +26,7 @@ router.post('/delete', async (req, res) => {
     res.json(Utils.getResponse(508))
     return
   }
-  const call = await dictionaryDelete({id: body.id})
+  const call = await dictionaryDelete(body)
   if(!Utils.validDBError(res, call.err)){
     return
   }

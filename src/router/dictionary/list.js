@@ -5,11 +5,11 @@ const {dictionaryList} = require('../../dao/dictionary')
 const router = express.Router()
 
 router.post('/list', async (req, res) => {
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, 'type')){
+  const body = Utils.getRequire(req, res, 'dictionary', 'list')
+  if(!body){
     return
   }
-  const {err, result} = await dictionaryList({type: body.type})
+  const {err, result} = await dictionaryList(body)
   if(!Utils.validDBError(res, err)){
     return
   }

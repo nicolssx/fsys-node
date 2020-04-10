@@ -4,17 +4,20 @@ const {userUpdate} = require('../../dao/user')
 const router = express.Router()
 
 router.post('/resetPwd', async (req, res) => {
-  const body = Utils.getBody(req)
-  if(!Utils.validRule(res, body, ['password', 'oldPassword'])){ // 校验客户端发送报文
-    return
-  }
-  const {uid, password} = await Service.authorization(req, res) // token、MD5校验
+  const {uid, name} = await Service.authorization(req, res) // token、MD5校验
   if(!uid){
     return
   }
+
+  // 校验客户端发送报文
+  const body = Utils.getRequire(req, res, 'user', 'resetPwd')
+  if(!body){
+    return
+  }
+
   let response
-  if(password !== body.oldPassword){ // 密码校验
-    response = Utils.getResponse(506)
+  if(name !== body.name){
+    response = Utils.getResponse(510)
   } else {
     const {err} = await userUpdate({_id: uid}, {password: body.password}) // 更新密码
     if(!Utils.validDBError(res, err)){
